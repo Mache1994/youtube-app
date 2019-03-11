@@ -38,12 +38,11 @@ function display(data){
     	fHtml+=`<li>
     	<div class=" Video">
     		
-                <a href = "https://www.youtube.com/watch?v=${data.items[i].id.videoId}"" target = "-blank"> ${data.items[i].snippet.title}
-                </a>
+                <a href = "https://www.youtube.com/watch?v=${data.items[i].id.videoId}"" target = "-blank"> ${data.items[i].snippet.title}</a>
                 <br>
     			
     		<a href = "https://www.youtube.com/watch?v=${data.items[i].id.videoId}"" target = "-blank">
-    			<img style="width:15%" src="${data.items[i].snippet.thumbnails.default.url}" alt="${searchTerm} Image" />
+    			<img style="width:20%" src="${data.items[i].snippet.thumbnails.default.url}" alt="${searchTerm} Image" />
     		</a>
     		<br>
     		</div> 
