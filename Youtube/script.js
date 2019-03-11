@@ -25,14 +25,7 @@ function watchForm(){
     {
       let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchTerm}&key=${apiKey}`;
       buildFetch(searchTerm, url, display);
-    }
-  });
-
-
-
-
-}
-
+    }});}
 
 
 function display(data){
@@ -54,7 +47,7 @@ function display(data){
     		</a>
     		<br>
     		</div> 
-    						</li>`;
+    		</li>`;
     }
 
 	$('.results').append('<ul>'+fHtml+'</ul>');
@@ -85,7 +78,7 @@ if(data.nextPageToken)
       }
     });
 
-    $(".buttons").append(nextBtn);
+ $(".buttons").append(nextBtn);
   }   
 	
 }
