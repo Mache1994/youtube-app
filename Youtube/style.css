@@ -1,0 +1,43 @@
+
+  console.log("Add buttons called");
+  if(data.nextPageToken)
+  {
+    let newNextButton=$(`
+                      <button type="submit" id="nextVideos" class="buttons">
+                        Next videos
+                      </button>
+                    `);
+    
+
+    $(newNextButton).on("click", function(event){
+      if(searchTerm != "")
+      {
+        let url = `https://www.googleapis.com/youtube/v3/search?pageToken=${data.nextPageToken}&part=snippet&maxResults=10&q=${searchTerm}&key=${apiKey}`;
+        buildFetch(searchTerm, url, displayVideos);
+        console.log("Fetch for next videos");
+      }
+    });
+
+    $(".navButtons").append(newNextButton);
+  }
+
+  if(data.prevPageToken)
+  {
+    let newPrevButton=$(`
+                      <button type="submit" id="prevVideos" class="buttons">
+                        Previous videos
+                      </button>
+                    `);
+    
+
+    $(newPrevButton).on("click", function(event){
+      if(searchTerm != "")
+      {
+        let url = `https://www.googleapis.com/youtube/v3/search?pageToken=${data.prevPageToken}&part=snippet&maxResults=10&q=${searchTerm}&key=${apiKey}`;
+        buildFetch(searchTerm, url, displayVideos);
+        console.log("Fetch for next videos");
+      }
+    });
+
+    $(".navButtons").append(newPrevButton);
+  }

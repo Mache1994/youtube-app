@@ -24,14 +24,18 @@ function watchForm(){
     if(searchTerm != "")
     {
       let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchTerm}&key=${apiKey}`;
-      buildFetch(searchTerm, url, displayVideos);
+      buildFetch(searchTerm, url, display);
     }
   });
+
+
+
+
 }
 
 
 
-function displayVideos(data){
+function display(data){
   	$(".results").html(""); //Empty the html of that section
 
   	let fHtml=''
@@ -55,8 +59,35 @@ function displayVideos(data){
 
 	$('.results').append('<ul>'+fHtml+'</ul>');
 	$(".buttons").html("");
-	$(".buttons").append(`<button type="submit" class="NextButton">More Results</button>`);
-  
+
+	if(data.prevPageToken)
+  {
+    let PrevBtn=$(`<button type="submit" class="PrevButton">Previous Results</button>`);
+    $(PrevBtn).on("click", function(event){
+      if(searchTerm != "")
+      {
+        let url = `https://www.googleapis.com/youtube/v3/search?pageToken=${data.prevPageToken}&part=snippet&maxResults=10&q=${searchTerm}&key=${apiKey}`;
+        buildFetch(searchTerm, url, display);
+      }
+    });
+
+    $(".buttons").append(PrevBtn);
+  }
+	
+if(data.nextPageToken)
+  {
+    let nextBtn=$(`<button type="submit" class="NextButton">Next Results</button>`);
+    $(nextBtn).on("click", function(event){
+      if(searchTerm != "")
+      {
+        let url = `https://www.googleapis.com/youtube/v3/search?pageToken=${data.nextPageToken}&part=snippet&maxResults=10&q=${searchTerm}&key=${apiKey}`;
+        buildFetch(searchTerm, url, display);
+      }
+    });
+
+    $(".buttons").append(nextBtn);
+  }   
+	
 }
 
 
